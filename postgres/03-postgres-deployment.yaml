@@ -24,7 +24,12 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: postgredb
+            - name: config-volume
+              mountPath: /docker-entrypoint-initdb.d
       volumes:
         - name: postgredb
           persistentVolumeClaim:
             claimName: postgres-pv-claim
+        - name: config-volume
+          configMap:
+            name: postgres-script-config
